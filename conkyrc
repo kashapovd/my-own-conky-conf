@@ -14,7 +14,7 @@ conky.config = {
 	minimum_width = 200, minimum_height = 0,
 	maximum_width = 200,
 
-	gap_x = 14,
+	gap_x = 15,
 	gap_y = 40,
 
 	alignment = 'top_right',
@@ -89,8 +89,8 @@ uptime: ${alignr}${uptime_short}
 
 ${alignc}H A R D W A R E
 ${hr}
-${image /home/yaroslav/Pictures/conky_icon/cpu.png -p 0,137}   CPU: ${cpu cpu0}%${alignr}${cpugraph cpu0 12,90 9ACD32 CD5C5C -t}
-${image /home/yaroslav/Pictures/conky_icon/mem.png -p 0,153}   RAM: ${memperc}%
+${image /home/yaroslav/projects/repos/my-own-conky-conf/conky_icon/cpu.png -p 0,137}   CPU: ${cpu cpu0}%${alignr}${cpugraph cpu0 12,90 9ACD32 CD5C5C -t}
+${image /home/yaroslav/projects/repos/my-own-conky-conf/conky_icon/mem.png -p 0,153}   RAM: ${memperc}%
 ${membar 4,95} ${alignr}${mem}/${memmax}
 SWAP: ${swapperc}%
 ${swapbar 4,95} ${alignr}${swap}/${swapmax} 
@@ -104,11 +104,11 @@ ${alignc}N E T W O R K
 ${hr}
 ${if_existing /proc/net/route wlp4s0}WLAN:
   ├─ IP: ${addr wlp4s0}
-  ├─ speed: ${downspeed wlp4s0} ${alignr}${downspeedgraph wlp4s0 12,90 9ACD32 CD5C5C -t -l} 
+  ├─ speed: ${downspeed wlp4s0} ${alignr}${downspeedgraph wlp4s0 12,90 9ACD32 CD5C5C -t} 
   └─ totaldown: ${exec /home/yaroslav/projects/repos/my-own-conky-conf/calc_totaldown}${else}wlp4s0 is down${endif}
 ${if_existing /proc/net/route enp3s0}ETH:
   ├─ IP: ${addr enp3s0}
-  ├─ speed: ${downspeed enp3s0} ${alignr}${downspeedgraph enp3s0 12,90 9ACD32 CD5C5C -t -l} 
+  ├─ speed: ${downspeed enp3s0} ${alignr}${downspeedgraph enp3s0 12,90 9ACD32 CD5C5C -t} 
   └─ totaldnld: ${totaldown enp3s0}${else}enp3s0 is down${endif}
 
 ${alignc}T O P 5
