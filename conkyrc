@@ -6,7 +6,7 @@ conky.config = {
 	own_window_hints = 'undecorated,below,sticky,skip_taskbar,skip_pager',
 	own_window_colour = '#000000',
 	own_window_class = 'Conky',
-	own_window_title = 'Debian Conky',
+	own_window_title = 'arch conky',
 
 	own_window_argb_visual = true,
 	own_window_argb_value = 50,
@@ -80,20 +80,18 @@ conky.config = {
 };
 
 conky.text = [[
-${alignc}H O S T  I N F O
-${hr}
-host: ${alignr}${nodename}
+${alignc}${color orange}H O S T  I N F O
+${hr}${color}
+host: ${alignr}${color DeepSkyBlue}${nodename}${color}
 kernel: ${alignr}${kernel}
 packages: ${alignr}${exec "pacman -Q | wc -l"}(pacman)
 uptime: ${alignr}${uptime_short}
 
-${alignc}H A R D W A R E
-${hr}
-${if_match ${cpu cpu0}>=85}${color red}CPU: ${cpu cpu0}% ${alignr}${freq_g} GHz
-${cpugraph cpu1 30,98 9ACD32 CD5C5C -t} ${cpugraph cpu2 30,98 9ACD32 CD5C5C -t}
-${voffset -11}${cpugraph cpu3 30,98 9ACD32 CD5C5C -t} ${cpugraph cpu4 30,98 9ACD32 CD5C5C -t}${color}${else}CPU: ${cpu cpu0}% ${alignr}${freq_g} GHz
-${cpugraph cpu1 30,98 9ACD32 CD5C5C -t} ${cpugraph cpu2 30,98 9ACD32 CD5C5C -t}
-${voffset -11}${cpugraph cpu3 30,98 9ACD32 CD5C5C -t} ${cpugraph cpu4 30,98 9ACD32 CD5C5C -t}${endif}
+${alignc}${color orange}H A R D W A R E
+${hr}${color}
+${if_match ${cpu cpu0}>=85}${color red}CPU: ${cpu cpu0}% ${alignr}${freq_g} GHz${color}${else}CPU: ${cpu cpu0}% ${alignr}${freq_g} GHz${endif}
+${cpugraph cpu1 30,98 9ACD32 CD5C5C -t} ${cpugraph cpu2 30,98 9ACD32 CD5C5C -t}${offset -199}${voffset 1}${font hack:size=6}th1${goto 110}th2${font}
+${voffset -16}${cpugraph cpu3 30,98 9ACD32 CD5C5C -t} ${cpugraph cpu4 30,98 9ACD32 CD5C5C -t}${offset -199}${voffset 1}${font hack:size=6}th3${goto 110}th4${font}${voffset -14}
 ${stippled_hr}
 ${if_match  ${memperc}>=85}${color red}RAM: ${memperc}%
 ${membar 4,95} ${alignr}${mem}/${memmax}${color}${else}RAM: ${memperc}%
@@ -110,24 +108,24 @@ HDD ${fs_type /mnt/common}
   ${if_match ${fs_used_perc /mnt/common}>=85}${color red}├─ common: ${fs_used_perc /mnt/common}% ${alignr}${fs_used /mnt/common}/${fs_size /mnt/common}${color}${else}├─ common: ${fs_used_perc /mnt/common}% ${alignr}${fs_used /mnt/common}/${fs_size /mnt/common}${endif}
   ${if_match ${fs_used_perc /mnt/windows}>=85}${color red}└─ windows: ${fs_used_perc /mnt/windows}% ${alignr}${fs_used /mnt/windows}/${fs_size /mnt/windows}${color}${else}└─ windows: ${fs_used_perc /mnt/windows}% ${alignr}${fs_used /mnt/windows}/${fs_size /mnt/windows}${endif}
 
-${alignc}N E T W O R K
-${hr}
-${if_existing /proc/net/route wlp4s0}WLAN:
+${alignc}${color orange}N E T W O R K
+${hr}${color}
+${if_existing /proc/net/route wlp4s0}WLAN
   ├─ IP: ${addr wlp4s0}
-  ├─ speed: ${downspeed wlp4s0} ${alignr}${downspeedgraph wlp4s0 12,90 9ACD32 CD5C5C -t} 
+  ├─ speed: ${downspeedgraph wlp4s0 12,80 9ACD32 CD5C5C -t -l}${alignr}${downspeed wlp4s0} 
   └─ totaldown: ${exec /home/yaroslav/projects/repos/my-own-conky-conf/calc_totaldown.sh}${else}wlp4s0 is down${endif}
-${if_existing /proc/net/route enp3s0}ETH:
+${if_existing /proc/net/route enp3s0}ETH
   ├─ IP: ${addr enp3s0}
-  ├─ speed: ${downspeed enp3s0} ${alignr}${downspeedgraph enp3s0 12,90 9ACD32 CD5C5C -t} 
+  ├─ speed: ${downspeedgraph enp3s0 12,70 9ACD32 CD5C5C -t -l}${alignr}${downspeed enp3s0}
   └─ totaldnld: ${totaldown enp3s0}${else}enp3s0 is down${endif}
 
-${alignc}T O P 5
-${hr}
-NAME${alignr}MEM CPU%
+${alignc}${color orange}T O P 5
+${hr}${color}
+NAME${alignr}MEM CPU%${offset -75}|
 ${stippled_hr}
-${top name 1}${alignr}${top mem 1}${top cpu 1}
-${top name 2}${alignr}${top mem 2}${top cpu 2}
-${top name 3}${alignr}${top mem 3}${top cpu 3}
-${top name 4}${alignr}${top mem 4}${top cpu 4}
-${top name 5}${alignr}${top mem 5}${top cpu 5}
+${top name 1}${alignr}${top mem 1}${top cpu 1}${offset -75}|
+${top name 2}${alignr}${top mem 2}${top cpu 2}${offset -75}|
+${top name 3}${alignr}${top mem 3}${top cpu 3}${offset -75}|
+${top name 4}${alignr}${top mem 4}${top cpu 4}${offset -75}|
+${top name 5}${alignr}${top mem 5}${top cpu 5}${offset -75}|
 ]];
