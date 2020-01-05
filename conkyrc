@@ -89,16 +89,26 @@ uptime: ${alignr}${uptime_short}
 
 ${alignc}H A R D W A R E
 ${hr}
-${image /home/yaroslav/projects/repos/my-own-conky-conf/conky_icon/cpu.png -p 0,137}   CPU: ${cpu cpu0}%${alignr}${cpugraph cpu0 12,90 9ACD32 CD5C5C -t}
-${image /home/yaroslav/projects/repos/my-own-conky-conf/conky_icon/mem.png -p 0,153}   RAM: ${memperc}%
-${membar 4,95} ${alignr}${mem}/${memmax}
-SWAP: ${swapperc}%
-${swapbar 4,95} ${alignr}${swap}/${swapmax} 
-SSD: ${fs_used_perc /}% ${fs_type /}
-${fs_bar 4,95} ${alignr}${fs_used /}/${fs_size /}
+${if_match ${cpu cpu0}>=85}${color red}CPU: ${cpu cpu0}% ${alignr}${freq_g} GHz
+${cpugraph cpu1 30,98 9ACD32 CD5C5C -t} ${cpugraph cpu2 30,98 9ACD32 CD5C5C -t}
+${voffset -11}${cpugraph cpu3 30,98 9ACD32 CD5C5C -t} ${cpugraph cpu4 30,98 9ACD32 CD5C5C -t}${color}${else}CPU: ${cpu cpu0}% ${alignr}${freq_g} GHz
+${cpugraph cpu1 30,98 9ACD32 CD5C5C -t} ${cpugraph cpu2 30,98 9ACD32 CD5C5C -t}
+${voffset -11}${cpugraph cpu3 30,98 9ACD32 CD5C5C -t} ${cpugraph cpu4 30,98 9ACD32 CD5C5C -t}${endif}
+${stippled_hr}
+${if_match  ${memperc}>=85}${color red}RAM: ${memperc}%
+${membar 4,95} ${alignr}${mem}/${memmax}${color}${else}RAM: ${memperc}%
+${membar 4,95} ${alignr}${mem}/${memmax}${endif}
+${stippled_hr}
+${if_match ${swapperc}>=85}${color red}SWAP: ${swapperc}%
+${swapbar 4,95} ${alignr}${swap}/${swapmax}${color}${else}SWAP: ${swapperc}%
+${swapbar 4,95} ${alignr}${swap}/${swapmax}${endif}
+${stippled_hr}
+${if_match ${fs_used_perc /}>=85}${color red}SSD: ${fs_used_perc /}% ${fs_type /}
+${fs_bar 4,95} ${alignr}${fs_used /}/${fs_size /}${color}${else}SSD: ${fs_used_perc /}% ${fs_type /}
+${fs_bar 4,95} ${alignr}${fs_used /}/${fs_size /}${endif}
 HDD ${fs_type /mnt/common}
-  ├─ common: ${fs_used_perc /mnt/common}% ${alignr}${fs_used /mnt/common}/${fs_size /mnt/common}
-  └─ windows: ${fs_used_perc /mnt/windows}% ${alignr}${fs_used /mnt/windows}/${fs_size /mnt/windows}
+  ${if_match ${fs_used_perc /mnt/common}>=85}${color red}├─ common: ${fs_used_perc /mnt/common}% ${alignr}${fs_used /mnt/common}/${fs_size /mnt/common}${color}${else}├─ common: ${fs_used_perc /mnt/common}% ${alignr}${fs_used /mnt/common}/${fs_size /mnt/common}${endif}
+  ${if_match ${fs_used_perc /mnt/windows}>=85}${color red}└─ windows: ${fs_used_perc /mnt/windows}% ${alignr}${fs_used /mnt/windows}/${fs_size /mnt/windows}${color}${else}└─ windows: ${fs_used_perc /mnt/windows}% ${alignr}${fs_used /mnt/windows}/${fs_size /mnt/windows}${endif}
 
 ${alignc}N E T W O R K
 ${hr}
